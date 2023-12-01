@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>card</title>
+    <style>
+        div {
+            /*border: 1px solid red;*/
+        }
+
+        .container {
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            /* 부모 크기의 절반만큼 아래로 이동 */
+            top: 50%;
+            /* 부모 크기의 절반만큼 오른쪽으로 이동 */
+            left: 50%;
+
+            /* 본인 크기의 절반만큼 위로 이동 + 왼쪽으로 이동 */
+            transform: translate(-50%, -50%);
+
+            border-radius: 30px;
+
+            padding: 40px;
+            display: flex;
+            /* 수평 -> 수직 방향으로 변경 */
+            align-items: center;
+            /* 방향 바뀐 후 수직 정렬 */
+            justify-content: center;
+            border: 1px solid black;
+
+        }
+
+        .score {
+            height: 100%;
+            border-width: 1px 1px 1px 0px;
+            border-style: solid;
+            border-color: black;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sco {
+            height: 120px;
+            box-sizing: border-box;
+        }
+
+
+        .sco > div {
+
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border-bottom: 1px solid black;
+            height: calc(100% / 3);
+            padding: 5px;
+
+        }
+
+
+        #restart {
+
+            width: 90%;
+            height: 50px;
+            background-color: #5f5fff;
+            color: white;
+            border-radius: 30px;
+            margin-bottom: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            border-width: 0px 0px 0px 0px;
+            border-style: solid;
+            border-color: black;
+
+        }
+
+        .butBox {
+            text-align: center;
+        }
+
+        .container > div:nth-child(1) {
+            height: 100%;
+            width: 80%;
+        }
+
+        .container > div:nth-child(2) {
+            height: 100%;
+            width: 20%;
+        }
+
+        .card > div {
+            display: flex;
+            /* 수평 -> 수직 방향으로 변경 */
+            align-items: center;
+            /* 방향 바뀐 후 수직 정렬 */
+            height: calc(100% / 4 - 2px);
+            margin: auto;
+            justify-content: space-evenly;
+
+        }
+
+        .card {
+            border: 1px solid black;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div id="row-1">
+            <img src="images/카드뒷면2.png" class="oo" alt="">
+            <img src="images/카드뒷면2.png" class="otw" alt="">
+            <img src="images/카드뒷면2.png" class="oth" alt="">
+            <img src="images/카드뒷면2.png" class="ofo" alt="">
+            <img src="images/카드뒷면2.png" class="ofi" alt="">
+            <img src="images/카드뒷면2.png" class="osi" alt="">
+            <img src="images/카드뒷면2.png" class="ose" alt="">
+        </div>
+        <div id="row-2">
+            <img src="images/카드뒷면2.png" class="two" alt="">
+            <img src="images/카드뒷면2.png" class="twtw" alt="">
+            <img src="images/카드뒷면2.png" class="twth" alt="">
+            <img src="images/카드뒷면2.png" class="twfo" alt="">
+            <img src="images/카드뒷면2.png" class="twfi" alt="">
+            <img src="images/카드뒷면2.png" class="twsi" alt="">
+            <img src="images/카드뒷면2.png" class="twse" alt="">
+        </div>
+        <div id="row-3">
+            <img src="images/카드뒷면2.png" class="tho" alt="">
+            <img src="images/카드뒷면2.png" class="thtw" alt="">
+            <img src="images/카드뒷면2.png" class="thth" alt="">
+            <img src="images/카드뒷면2.png" class="thfo" alt="">
+            <img src="images/카드뒷면2.png" class="thfi" alt="">
+            <img src="images/카드뒷면2.png" class="thsi" alt="">
+            <img src="images/카드뒷면2.png" class="thse" alt="">
+        </div>
+        <div id="row-4">
+            <img src="images/카드뒷면2.png" class="foo" alt="">
+            <img src="images/카드뒷면2.png" class="fotw" alt="">
+            <img src="images/카드뒷면2.png" class="foth" alt="">
+            <img src="images/카드뒷면2.png" class="fofo" alt="">
+            <img src="images/카드뒷면2.png" class="fofi" alt="">
+            <img src="images/카드뒷면2.png" class="fosi" alt="">
+            <img src="images/카드뒷면2.png" class="fose" alt="">
+        </div>
+    </div>
+    <div class="score">
+        <div class="sco">
+            <div id="id">
+
+            </div>
+            <div id="bestScore">
+                기록없음
+            </div>
+            <div id="score">
+                현재 점수 :
+            </div>
+            <div id="time">
+                00:00
+            </div>
+            <div id="wCount">
+                틀린횟수: 0
+            </div>
+        </div>
+        <div class="butBox">
+            <button id="restart" type="button"
+                    onclick="location.href='http://localhost:63342/HTML/card/card.html?_ijt=mp4hgmc1ge0io7hads1373bkkl&_ij_reload=RELOAD_ON_SAVE' ">
+                다시하기
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const image = ["images/클로버1.png", "images/클로버2.png", "images/클로버3.png", "images/클로버4.png", "images/클로버5.png", "images/클로버6.png",
+        "images/클로버7.png", "images/클로버8.png", "images/클로버9.png", "images/클로버10.png", "images/클로버J.png", "images/클로버Q.png",
+        "images/클로버K.png", "images/완료이미지.png", "images/클로버1.png", "images/클로버2.png",
+        "images/클로버3.png", "images/클로버4.png", "images/클로버5.png", "images/클로버6.png",
+        "images/클로버7.png", "images/클로버8.png", "images/클로버9.png", "images/클로버10.png",
+        "images/클로버J.png", "images/클로버Q.png", "images/클로버K.png", "images/완료이미지.png"];
+
+
+    const shuffle = image.sort(() => Math.random() - 0.5);
+
+    console.log(shuffle);
+
+    let cardBack = []
+    let clickBack = []
+    let idx = 0;
+    let checkCard = 0;
+    let time = 0;
+    let wCount = 0;
+
+
+    const clickImage_01 = document.querySelector(".oo")
+    const clickImage_02 = document.querySelector(".otw")
+    const clickImage_03 = document.querySelector(".oth")
+    const clickImage_04 = document.querySelector(".ofo")
+    const clickImage_05 = document.querySelector(".ofi")
+    const clickImage_06 = document.querySelector(".osi")
+    const clickImage_07 = document.querySelector(".ose")
+    const clickImage_08 = document.querySelector(".two")
+    const clickImage_09 = document.querySelector(".twtw")
+    const clickImage_10 = document.querySelector(".twth")
+    const clickImage_11 = document.querySelector(".twfo")
+    const clickImage_12 = document.querySelector(".twfi")
+    const clickImage_13 = document.querySelector(".twsi")
+    const clickImage_14 = document.querySelector(".twse")
+    const clickImage_15 = document.querySelector(".tho")
+    const clickImage_16 = document.querySelector(".thtw")
+    const clickImage_17 = document.querySelector(".thth")
+    const clickImage_18 = document.querySelector(".thfo")
+    const clickImage_19 = document.querySelector(".thfi")
+    const clickImage_20 = document.querySelector(".thsi")
+    const clickImage_21 = document.querySelector(".thse")
+    const clickImage_22 = document.querySelector(".foo")
+    const clickImage_23 = document.querySelector(".fotw")
+    const clickImage_24 = document.querySelector(".foth")
+    const clickImage_25 = document.querySelector(".fofo")
+    const clickImage_26 = document.querySelector(".fofi")
+    const clickImage_27 = document.querySelector(".fosi")
+    const clickImage_28 = document.querySelector(".fose")
+
+    const allImg = document.querySelectorAll("img")
+    const timer = document.querySelector("#time")
+    const wCounter = document.querySelector("#wCount")
+    const score = document.querySelector("#score")
+    const id = document.querySelector("#id")
+    const myBestScore = document.querySelector("#bestScore")
+    let logid = JSON.parse(sessionStorage.getItem("loginState"));
+    let scoreRecord = JSON.parse(localStorage.getItem("users"));
+    let userInfo = JSON.parse(localStorage.getItem("users")) || []
+
+
+    // 게임중 아이디칸에 접속한 아이디를 넣어줌
+    id.innerHTML = logid[0].loginId
+
+    // 유저목록과 내가 접속한 아이디가 같은걸 찾아서 그 유저의 최고점수를 가져와 최고점수칸에 넣어줌
+    for(let i =0 ; i<userInfo.length ; i++){
+        if(userInfo[i].userId===logid[0].loginId){
+           myBestScore.innerHTML = "최고점수 : " + userInfo[i].bestScore
+        }
+    }
+
+    // 모든 이미지를 돌면서
+    allImg.forEach((ev) => {
+        //이미지의 src를 shuffle[idx++]로 바꿔주고
+        ev.src = shuffle[idx++]
+        //5초후에 모든 이미지를 다시 카드뒷면으로 바꿔줌
+        setTimeout(f_aRollback, 5000, ev)
+
+    })
+
+
+    // 같으면 이미지를 뒷면에서 앞면으로 바꿔주고 다르면 다시 뒷면으로 이미지를 바꿔주는 함수
+    function check() {
+
+        if (cardBack.length >= 2) {
+
+            if (cardBack[0] === cardBack[1] && !(clickBack[0] === clickBack[1])) {
+
+                console.log('같다')
+
+                checkCard += 1;
+                console.log(checkCard)
+                cardBack = []
+                clickBack = []
+
+            } else {
+                console.log('안같다')
+
+                setTimeout(f_rollback, 500, clickBack);
+
+                wCount += 1;
+                wCounter.textContent = `틀린횟수 : ${wCount}`
+                cardBack = []
+                clickBack = []
+            }
+
+            if (checkCard === 14) {
+
+                alert(`${1000000 - wCount * 10000 - time * 1000}점`)
+                location.href = "card.html"
+
+                // let userInfo = JSON.parse(localStorage.getItem("users")) || []
+                //
+                // userInfo.push({"userId": idVar.value, "userPw": pwVar.value, "postNum":postVar.value, "roadAddr":roadAddVar.value, "detailAddr":detailVar.value})
+                //
+                // localStorage.setItem("users" , JSON.stringify(userInfo))
+
+
+                for (let i = 0; i < userInfo.length; i++) {
+                    if (userInfo[i].userId === logid[0].loginId) {
+
+                        if (userInfo[i].bestScore < 1000000 - (wCount * 10000) - (time * 1000)) {
+                            userInfo[i].bestScore = 1000000 - (wCount * 10000) - (time * 1000)
+
+                            localStorage.setItem("users", JSON.stringify(userInfo))
+
+                        }
+                    }
+                }
+
+
+            }
+
+        }
+    }
+
+
+    // 선택한 두개의 카드이미지가 같지 않을경우 다시 원래 이미지인 뒷면으로 되돌려주는 함수
+    function f_rollback(a) {
+
+        a[0].src = "images/카드뒷면2.png"
+        a[1].src = "images/카드뒷면2.png"
+
+    }
+
+    function f_aRollback(a) {
+        a.src = "images/카드뒷면2.png"
+    }
+
+    setTimeout(function () {
+        setInterval(function () {
+
+            const second = time % 60;
+            const minute = Math.floor(time / 60)
+
+            if (minute < 10 && second < 10) {
+                timer.innerText = `0${minute} : 0${second}`
+            } else if (minute < 10 && second >= 10) {
+                timer.innerText = `0${minute} : ${second}`
+            } else if (minute >= 10 && second < 10) {
+                timer.innerText = `${minute} : 0${second}`
+            } else if (minute >= 10 && second >= 10) {
+                timer.innerText = `${minute} : ${second}`
+            }
+            time++
+        }, 1000)
+    }, 4000)
+
+    setTimeout(function () {
+
+        setInterval(function () {
+
+            score.innerText = `현재점수 : ${1000000 - wCount * 10000 - time * 1000}`
+
+        }, 10)
+
+    }, 5000)
+
+
+    console.log(cardBack[0])
+
+    //첫번째 카드 이미지를 클릭하면 발생하는 이벤트를 추가
+    clickImage_01.addEventListener("click", function (ev) {
+
+        // 카드 1번의 이미지가 카드 뒷면인지 확인하고 아니면 진행하지 않는다 ( 찾아서 앞면이 된 카드를 다시 눌러 뒷면으로 뒤집는걸 막음)
+        if (clickImage_01.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            // 첫번째 카드 이미지에 카드 이미지를 셔플해놓은 배열의 첫번째 이미지를 담아줌다
+            clickImage_01.src = shuffle[0];
+            clickImage_01.alt = "첫번째 앞면";
+
+            // 뒤집은 카드 배열에 섞어놓은 첫번째 카드 이미지의 src를 담는다
+            cardBack.push(shuffle[0])
+            // 뒤집은 카드 순서 배열에 1번이미지 순서를 담는
+            clickBack.push(clickImage_01)
+            check()
+
+        }
+    })
+    clickImage_02.addEventListener("click", function (ev) {
+
+
+        if (clickImage_02.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_02.src = shuffle[1];
+            clickImage_02.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[1])
+            clickBack.push(clickImage_02)
+            check()
+
+        }
+    })
+    console.log(cardBack)
+
+    clickImage_03.addEventListener("click", function (ev) {
+
+        if (clickImage_03.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_03.src = shuffle[2];
+            clickImage_03.alt = shuffle[2];
+
+            cardBack.push(shuffle[2])
+            clickBack.push(clickImage_03)
+            check()
+
+        }
+    })
+
+    clickImage_04.addEventListener("click", function (ev) {
+
+        if (clickImage_04.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_04.src = shuffle[3];
+            clickImage_04.alt = shuffle[1];
+
+            cardBack.push(shuffle[3])
+            clickBack.push(clickImage_04)
+            check()
+        }
+    })
+
+
+    clickImage_05.addEventListener("click", function (ev) {
+
+        if (clickImage_05.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_05.src = shuffle[4];
+            clickImage_05.alt = shuffle[1];
+
+            cardBack.push(shuffle[4])
+            clickBack.push(clickImage_05)
+            check()
+        }
+    })
+
+    clickImage_06.addEventListener("click", function (ev) {
+
+
+        if (clickImage_06.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+            clickImage_06.src = shuffle[5];
+            clickImage_06.alt = shuffle[5];
+
+            cardBack.push(shuffle[5])
+            clickBack.push(clickImage_06)
+            check()
+        }
+    })
+
+
+    clickImage_07.addEventListener("click", function (ev) {
+
+        if (clickImage_07.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+            clickImage_07.src = shuffle[6];
+            clickImage_07.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[6])
+            clickBack.push(clickImage_07)
+            check()
+        }
+    })
+
+    clickImage_08.addEventListener("click", function (ev) {
+
+        if (clickImage_08.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_08.src = shuffle[7];
+            clickImage_08.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[7])
+            clickBack.push(clickImage_08)
+            check()
+        }
+    })
+
+    clickImage_09.addEventListener("click", function (ev) {
+
+        if (clickImage_09.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_09.src = shuffle[8];
+            clickImage_09.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[8])
+            clickBack.push(clickImage_09)
+            check()
+        }
+    })
+
+    clickImage_10.addEventListener("click", function (ev) {
+
+        if (clickImage_10.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_10.src = shuffle[9];
+            clickImage_10.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[9])
+            clickBack.push(clickImage_10)
+            check()
+        }
+
+    })
+
+    clickImage_11.addEventListener("click", function (ev) {
+
+        if (clickImage_11.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_11.src = shuffle[10];
+            clickImage_11.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[10])
+            clickBack.push(clickImage_11)
+            check()
+        }
+    })
+
+    clickImage_12.addEventListener("click", function (ev) {
+
+        if (clickImage_12.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_12.src = shuffle[11];
+            clickImage_12.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[11])
+            clickBack.push(clickImage_12)
+            check()
+        }
+    })
+
+    clickImage_13.addEventListener("click", function (ev) {
+
+        if (clickImage_13.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+            clickImage_13.src = shuffle[12];
+            clickImage_13.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[12])
+            clickBack.push(clickImage_13)
+            check()
+        }
+    })
+
+    clickImage_14.addEventListener("click", function (ev) {
+
+        if (clickImage_14.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_14.src = shuffle[13];
+            clickImage_14.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[13])
+            clickBack.push(clickImage_14)
+            check()
+        }
+
+    })
+
+    clickImage_15.addEventListener("click", function (ev) {
+
+        if (clickImage_15.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_15.src = shuffle[14];
+            clickImage_15.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[14])
+            clickBack.push(clickImage_15)
+            check()
+        }
+
+    })
+
+    clickImage_16.addEventListener("click", function (ev) {
+
+        if (clickImage_16.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_16.src = shuffle[15];
+            clickImage_16.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[15])
+            clickBack.push(clickImage_16)
+            check()
+        }
+    })
+
+    clickImage_17.addEventListener("click", function (ev) {
+
+        if (clickImage_17.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_17.src = shuffle[16];
+            clickImage_17.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[16])
+            clickBack.push(clickImage_17)
+            check()
+        }
+    })
+
+    clickImage_18.addEventListener("click", function (ev) {
+
+        if (clickImage_18.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_18.src = shuffle[17];
+            clickImage_18.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[17])
+            clickBack.push(clickImage_18)
+            check()
+        }
+    })
+
+    clickImage_19.addEventListener("click", function (ev) {
+
+        if (clickImage_19.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_19.src = shuffle[18];
+            clickImage_19.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[18])
+            clickBack.push(clickImage_19)
+            check()
+        }
+    })
+
+    clickImage_20.addEventListener("click", function (ev) {
+
+        if (clickImage_20.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_20.src = shuffle[19];
+            clickImage_20.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[19])
+            clickBack.push(clickImage_20)
+            check()
+        }
+    })
+
+    clickImage_21.addEventListener("click", function (ev) {
+
+        if (clickImage_21.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_21.src = shuffle[20];
+            clickImage_21.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[20])
+            clickBack.push(clickImage_21)
+            check()
+        }
+    })
+
+    clickImage_22.addEventListener("click", function (ev) {
+
+        if (clickImage_22.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_22.src = shuffle[21];
+            clickImage_22.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[21])
+            clickBack.push(clickImage_22)
+            check()
+        }
+    })
+
+    clickImage_23.addEventListener("click", function (ev) {
+
+        if (clickImage_23.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_23.src = shuffle[22];
+            clickImage_23.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[22])
+            clickBack.push(clickImage_23)
+            check()
+        }
+    })
+    clickImage_24.addEventListener("click", function (ev) {
+
+        if (clickImage_24.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_24.src = shuffle[23];
+            clickImage_24.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[23])
+            clickBack.push(clickImage_24)
+            check()
+        }
+    })
+    clickImage_25.addEventListener("click", function (ev) {
+
+        if (clickImage_25.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_25.src = shuffle[24];
+            clickImage_25.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[24])
+            clickBack.push(clickImage_25)
+            check()
+        }
+    })
+    clickImage_26.addEventListener("click", function (ev) {
+
+        if (clickImage_26.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_26.src = shuffle[25];
+            clickImage_26.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[25])
+            clickBack.push(clickImage_26)
+            check()
+        }
+    })
+    clickImage_27.addEventListener("click", function (ev) {
+
+        if (clickImage_27.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_27.src = shuffle[26];
+            clickImage_27.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[26])
+            clickBack.push(clickImage_27)
+            check()
+        }
+    })
+    clickImage_28.addEventListener("click", function (ev) {
+
+        if (clickImage_28.src === "http://localhost:63342/HTML/card/images/%EC%B9%B4%EB%93%9C%EB%92%B7%EB%A9%B42.png") {
+
+            clickImage_28.src = shuffle[27];
+            clickImage_28.alt = "두번째 앞면";
+
+            cardBack.push(shuffle[27])
+            clickBack.push(clickImage_28)
+            check()
+        }
+    })
+
+
+</script>
+
+</body>
+</html>

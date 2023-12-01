@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            /* 부모 크기의 절반만큼 아래로 이동 */
+            top: 50%;
+            /* 부모 크기의 절반만큼 오른쪽으로 이동 */
+            left: 50%;
+
+            /* 본인 크기의 절반만큼 위로 이동 + 왼쪽으로 이동 */
+            transform: translate(-50%, -50%);
+
+            border-radius: 30px;
+
+            display: flex;
+            /* 수평 -> 수직 방향으로 변경 */
+
+            /* 방향 바뀐 후 수직 정렬 */
+            flex-direction: column;
+
+            border: 1px solid black;
+        }
+
+        .logo {
+            top: 0;
+        }
+
+        .same {
+            width: 800px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .info input[type=text] {
+            width: 300px;
+            height: 30px;
+            margin-top: 10px;
+        }
+
+        .info input[type=password] {
+            width: 300px;
+            height: 30px;
+            margin-top: 10px;
+        }
+
+        #sample4_postcode {
+            width: 148px;
+            height: 36px;
+        }
+
+        .address > [type=button] {
+            width: 150px;
+            height: 42px;
+            margin-top: 10px;
+            background-color: #5f5fff;
+            color: white;
+            border: none;
+        }
+
+        .address > [type=button]:hover {
+            filter: brightness(70%);
+            cursor: pointer;
+        }
+
+        .signBut {
+            width: 308px;
+            height: 35px;
+            margin-top: 10px;
+            background-color: #5f5fff;
+            color: white;
+            border: none;
+        }
+
+        .signBut:hover {
+            filter: brightness(70%);
+            cursor: pointer;
+        }
+
+        #gologin {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="images/같은.png" class="same">
+    </div>
+    <div class="info">
+        <div id="id">
+            <input type="text" placeholder="아이디" class="id" id="inputId">
+        </div>
+        <div id="logId" style="display: none; color: red; margin: 5px 0"></div>
+        <div id="pw">
+            <input type="password" placeholder="비밀번호" class="pw" id="inputPw">
+        </div>
+        <div id="logPw" style="display: none; color: red; margin: 10px 0; font-size:1px;"></div>
+        <div class="address">
+            <input type="text" id="sample4_postcode" placeholder="우편번호">
+            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="find"><br>
+            <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br>
+            <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+        </div>
+        <div>
+            <button class="signBut" id="inputSign">가입하기</button>
+        </div>
+        <div>
+            <a href="index.html" id="gologin">로그인화면으로 돌아가기</a>
+
+        </div>
+    </div>
+</div>
+
+<span id="guide" style="color:#999;display:none"></span>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+    const signupBut = document.querySelector(".signBut")
+    const idVar = document.querySelector(".id")
+    const pwVar = document.querySelector(".pw")
+    const roadAddVar = document.querySelector("#sample4_roadAddress")
+    const postVar = document.querySelector("#sample4_postcode")
+    const detailVar = document.querySelector("#sample4_detailAddress")
+    let userInfo = JSON.parse(localStorage.getItem("users")) || []
+
+
+    // 입력한값에 문제가 없으면 전송
+    signupBut.addEventListener("click", (ev) => {
+        ev.preventDefault()
+
+        if (idVar.value === "") {
+            alert("아이디를 입력해주세요")
+            idVar.focus()
+        } else if (pwVar.value === "") {
+            alert("비밀번호를 입력해주세요")
+            pwVar.focus()
+        } else if (postVar.value === "") {
+            alert("우편번호를 입력해주세요")
+            postVar.focus()
+        } else if (roadAddVar.value === "") {
+            alert("도로명 주소를 입력해주세요")
+            roadAddVar.focus()
+        } else if (detailVar.value === "") {
+            alert("상세 주소를 입력해주세요")
+            detailVar.focus()
+        } else if (isId(idVar.value) === false) {
+            alert("올바른 아이디를 입력해 주세요")
+            idVar.focus()
+        } else if (isPw(pwVar.value) === false) {
+            alert("올바른 비밀번호를 입력해 주세요")
+            pwVar.focus()
+        } else {
+
+            for (let i = 0; i < userInfo.length; i++) {
+
+                if (userInfo[i].userId === idVar.value) {
+
+                    return alert("이미 사용중인 아이디입니다.")
+
+                }
+            }
+
+
+            userInfo.push({
+                "userId": idVar.value,
+                "userPw": pwVar.value,
+                "postNum": postVar.value,
+                "roadAddr": roadAddVar.value,
+                "detailAddr": detailVar.value,
+                "bestScore": ""
+            })
+
+            localStorage.setItem("users", JSON.stringify(userInfo))
+
+            alert("회원가입 성공")
+
+            location.href = "index.html"
+
+        }
+
+    })
+
+
+    // let loginState = JSON.parse(localStorage.getItem("")[]
+    //
+    // loginState.push({ "loginId": idVar.value,   })
+    //
+    // sessionStorage.setItem("loginState" , JSON.stringify(loginState))
+
+
+    idVar.addEventListener(("keyup"), function (ev) {
+
+        if (isId(idVar.value) === true) {
+            idDisplayMessage("")
+        } else if (isId(idVar.value) === false) {
+            idDisplayMessage("영문자로 시작하는 영문자 또는 숫자 6~20자만 사용 가능합니다.")
+        }
+    })
+
+    pwVar.addEventListener(("keyup"), function (ev) {
+        if (isPw(pwVar.value) === true) {
+            pwDisplayMessage("")
+        } else {
+            pwDisplayMessage("8~16자 영문, 숫자, 특수문자를 최소 한가지씩 조합해야 합니다.")
+        }
+    })
+
+    let user = []
+
+
+    // 회원가입 아이디 오류 메세지
+    const idDisplayMessage = function (message) {
+
+        const idEl = document.querySelector("#logId")
+
+        idEl.style.display = "block"
+        idEl.textContent = message
+
+    }
+
+    // 회원가입 비밀번호 오류 메세지
+    const pwDisplayMessage = function (message) {
+
+        const pwEl = document.querySelector("#logPw")
+        pwEl.style.display = "block"
+        pwEl.textContent = message
+    }
+    const detailDisplayMessage = function (message) {
+        const deEl = document.querySelector("#logDetail")
+        deEl.style.display = "block"
+        deEl.textContent = message
+    }
+
+    // 아이디 정규식 표현 함수
+    function isId(asValue) {
+        const regExp = /^[a-zA-z]+[A-Za-z0-9]{5,19}$/g;
+
+        return regExp.test(asValue);
+    }
+
+    // 비밀번호 정규식 표현 함수
+    function isPw(asValue) {
+        const regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+
+        return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
+    }
+
+
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if (data.buildingName !== '' && data.apartment === 'Y') {
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if (extraRoadAddr !== '') {
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                // document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+            }
+        }).open();
+    }
+
+</script>
+</body>
+</html>

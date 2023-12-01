@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            /* 부모 크기의 절반만큼 아래로 이동 */
+            top: 50%;
+            /* 부모 크기의 절반만큼 오른쪽으로 이동 */
+            left: 50%;
+
+            /* 본인 크기의 절반만큼 위로 이동 + 왼쪽으로 이동 */
+            transform: translate(-50%, -50%);
+
+            border-radius: 30px;
+
+            display: flex;
+            /* 수평 -> 수직 방향으로 변경 */
+
+            /* 방향 바뀐 후 수직 정렬 */
+            flex-direction: column;
+
+            border: 1px solid black;
+
+        }
+
+        .same {
+            width: 800px;
+            border-radius: 30px;
+            margin-bottom: 100px;
+        }
+
+        .logo {
+            top: 0;
+        }
+
+        .info {
+            text-align: center;
+        }
+
+        .info input[type=text] {
+            width: 300px;
+            height: 30px;
+            margin-top: 20px;
+        }
+        .info input[type=password] {
+            width: 300px;
+            height: 30px;
+            margin-top: 20px;
+        }
+        .info button{
+            width: 308px;
+            height: 30px;
+            margin-top: 20px;
+            background-color: #5f5fff;
+            color: white;
+            border: 0px;
+        }
+
+        #login:hover{
+            filter:brightness(70%);
+            cursor:pointer;
+        }
+
+        #signup:hover{
+            filter:brightness(70%);
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="images/같은.png" class="same">
+    </div>
+    <div class="info">
+        <div id="id">
+            <input type="text" placeholder="아이디" class="id" id="inputId">
+        </div>
+        <div id="pw">
+            <input type="password" placeholder="비밀번호" class="pw" id="inputPw">
+        </div>
+        <div>
+            <button id="login" >로그인</button>
+        </div>
+        <div>
+            <button id="signup" onclick="location.href='signup.html'">회원가입</button>
+        </div>
+    </div>
+    <div class="but">
+
+    </div>
+</div>
+
+
+<script>
+const login = JSON.parse(localStorage.getItem("users"))
+const idVar = document.querySelector("#inputId")
+const pwVar = document.querySelector("#inputPw")
+const loginBut = document.querySelector("#login")
+
+loginBut.addEventListener("click", () => {
+    for(let i = 0; i < login.length ; i++){
+        if(login[i].userId === idVar.value){
+            if(login[i].userPw === pwVar.value){
+
+                let loginState =  []
+
+                loginState.push({"loginId": idVar.value})
+
+                sessionStorage.setItem("loginState" , JSON.stringify(loginState))
+
+                alert("로그인 성공")
+                location.href = "card.html"
+
+
+            }else{
+                alert("아이디 또는 비밀번호를 잘못 입력했습니다.")
+            }
+        }
+    }
+})
+
+
+</script>
+</body>
+</html>
