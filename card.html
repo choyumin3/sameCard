@@ -246,14 +246,14 @@
 
 
     // 게임중 아이디칸에 접속한 아이디를 넣어줌
-    // id.innerHTML = logid[0].loginId
+    id.innerHTML = logid[0].loginId
 
     // 유저목록과 내가 접속한 아이디가 같은걸 찾아서 그 유저의 최고점수를 가져와 최고점수칸에 넣어줌
-    // for(let i =0 ; i<userInfo.length ; i++){
-    //     if(userInfo[i].userId===logid[0].loginId){
-    //        myBestScore.innerHTML = "최고점수 : " + userInfo[i].bestScore
-    //     }
-    // }
+    for(let i =0 ; i<userInfo.length ; i++){
+        if(userInfo[i].userId===logid[0].loginId){
+           myBestScore.innerHTML = "최고점수 : " + userInfo[i].bestScore
+        }
+    }
 
     // 모든 이미지를 돌면서
     allImg.forEach((ev) => {
